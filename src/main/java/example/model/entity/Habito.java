@@ -1,21 +1,15 @@
 package example.model.entity;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "habito")
 public class Habito {
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario idUsuario;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_actividad", nullable = false)
-    private Actividad idActividad;
+    @EmbeddedId
+    private HabitoId id;
 
     @Column(name = "frecuencia", nullable = false)
     private Integer frecuencia;
@@ -26,20 +20,12 @@ public class Habito {
     @Column(name = "ultima_fecha", nullable = false, length = 20)
     private String ultimaFecha;
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public HabitoId getId() {
+        return id;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public Actividad getIdActividad() {
-        return idActividad;
-    }
-
-    public void setIdActividad(Actividad idActividad) {
-        this.idActividad = idActividad;
+    public void setId(HabitoId id) {
+        this.id = id;
     }
 
     public Integer getFrecuencia() {

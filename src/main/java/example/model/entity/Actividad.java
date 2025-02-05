@@ -11,8 +11,9 @@ import java.util.Set;
 @Table(name = "actividad")
 public class Actividad {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_actividad", nullable = false)
-    private Integer idActividad;
+    private Integer id;
 
     @Column(name = "nombre", nullable = false, length = 200)
     private String nombre;
@@ -22,18 +23,18 @@ public class Actividad {
     @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria idCategoria;
 
-    @OneToMany(mappedBy = "idActividad")
+    @OneToMany
     private Set<Habito> habitos = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "idActividad")
     private Set<Huella> huellas = new LinkedHashSet<>();
 
-    public Integer getIdActividad() {
-        return idActividad;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdActividad(Integer idActividad) {
-        this.idActividad = idActividad;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {

@@ -25,7 +25,7 @@ public class Usuario {
     @Column(name = "fecha_registro", nullable = false, length = 20)
     private String fechaRegistro;
 
-    @OneToMany(mappedBy = "idUsuario")
+    @OneToMany
     private Set<Habito> habitos = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "idUsuario")

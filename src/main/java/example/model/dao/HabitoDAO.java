@@ -1,66 +1,68 @@
 package example.model.dao;
 
 import example.connection.Connection;
-import example.model.entity.Usuario;
+import example.model.entity.Habito;
+import example.model.entity.HabitoId;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
-public class UsuarioDAO {
+public class HabitoDAO {
 
-    public static void saveUser(Usuario usuario) {
-        //Session session = Connection.getInstance().getSessionFactory().openSession();
+    public static void saveHabito(Habito habito) {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            if (session.save(usuario) != null) {
-                tx.commit();
-            }
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-        }
-    }
-
-    public static Usuario findUser(String email) {
-        if (email == null || email.isEmpty()) {
-            return null;
-        }
-        Transaction tx = null;
-        Usuario usuario = null;
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        try {
-            tx = session.beginTransaction();
-            Query<Usuario> query = session.createQuery("FROM Usuario u WHERE u.email = :email", Usuario.class);
-            query.setParameter("email", email);
-            usuario = query.uniqueResult();
+            session.save(habito);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
+            e.printStackTrace();
         }
-        return usuario;
     }
 
-    public static boolean deleteUser(Usuario usuarioToDelete) {
-        Transaction tx = null;
-        boolean eliminado = false;
+    public static Habito findHabitoById(HabitoId id) {
+        if (id == null) {
+            return null;
+        }
+        Habito habito = null;
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
-        Usuario usuarioFinded=findUser(usuarioToDelete.getEmail());
-        if (usuarioFinded != null) {
-            return false;
-        }
+        Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.delete(usuarioFinded);
+            habito = session.get(Habito.class, id);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
+        return habito;
+    }
+
+    public static boolean deleteHabito(HabitoId id) {
+        if (id == null) {
+            return false;
+        }
+        Habito habito = findHabitoById(id);
+        if (habito == null) {
+            return false;
+        }
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        boolean eliminado = false;
+        try {
+            tx = session.beginTransaction();
+            session.delete(habito);
             tx.commit();
             eliminado = true;
         } catch (Exception e) {
@@ -72,4 +74,3 @@ public class UsuarioDAO {
         return eliminado;
     }
 }
-
