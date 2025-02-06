@@ -2,6 +2,7 @@ package example.model.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -13,13 +14,13 @@ public class Categoria {
     @Column(name = "id_categoria", nullable = false)
     private Integer id;
 
-    @Column(name = "nombre", nullable = false, length = 200)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "factor_emision", nullable = false)
-    private Double factorEmision;
+    @Column(name = "factor_emision", nullable = false, precision = 10, scale = 4)
+    private BigDecimal factorEmision;
 
-    @Column(name = "unidad", nullable = false, length = 10)
+    @Column(name = "unidad", nullable = false, length = 50)
     private String unidad;
 
     @OneToMany(mappedBy = "idCategoria")
@@ -44,11 +45,11 @@ public class Categoria {
         this.nombre = nombre;
     }
 
-    public Double getFactorEmision() {
+    public BigDecimal getFactorEmision() {
         return factorEmision;
     }
 
-    public void setFactorEmision(Double factorEmision) {
+    public void setFactorEmision(BigDecimal factorEmision) {
         this.factorEmision = factorEmision;
     }
 

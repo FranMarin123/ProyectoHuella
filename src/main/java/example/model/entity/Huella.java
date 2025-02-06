@@ -1,8 +1,11 @@
 package example.model.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.ColumnDefault;
+
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "huella")
@@ -12,24 +15,23 @@ public class Huella {
     @Column(name = "id_registro", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario")
     private Usuario idUsuario;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_actividad", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_actividad")
     private Actividad idActividad;
 
-    @Column(name = "valor", nullable = false)
-    private Integer valor;
+    @Column(name = "valor", nullable = false, precision = 10, scale = 2)
+    private BigDecimal valor;
 
-    @Column(name = "unidad", nullable = false, length = 10)
+    @Column(name = "unidad", nullable = false, length = 50)
     private String unidad;
 
-    @Column(name = "fecha", nullable = false, length = 20)
-    private String fecha;
+    @ColumnDefault("current_timestamp()")
+    @Column(name = "fecha")
+    private LocalDate fecha;
 
     public Integer getId() {
         return id;
@@ -55,11 +57,11 @@ public class Huella {
         this.idActividad = idActividad;
     }
 
-    public Integer getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Integer valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
@@ -71,11 +73,11 @@ public class Huella {
         this.unidad = unidad;
     }
 
-    public String getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

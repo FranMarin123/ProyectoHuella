@@ -1,8 +1,6 @@
 package example.model.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -15,15 +13,14 @@ public class Actividad {
     @Column(name = "id_actividad", nullable = false)
     private Integer id;
 
-    @Column(name = "nombre", nullable = false, length = 200)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_categoria", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categoria")
     private Categoria idCategoria;
 
-    @OneToMany
+    @OneToMany(mappedBy = "idActividad")
     private Set<Habito> habitos = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "idActividad")

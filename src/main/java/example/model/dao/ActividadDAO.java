@@ -3,16 +3,13 @@ package example.model.dao;
 import example.connection.Connection;
 import example.model.entity.Actividad;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 public class ActividadDAO {
 
-    public static void saveActividad(Actividad actividad) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
+    public void saveActividad(Actividad actividad) {
+        Session session = Connection.getInstance().getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
@@ -24,16 +21,32 @@ public class ActividadDAO {
                 tx.rollback();
             }
         }
+        session.close();
     }
 
-    public static Actividad findActividadByNombre(String nombre) {
-        if (nombre == null || nombre.isEmpty()) {
-            return null;
-        }
-        Actividad actividad = null;
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
+    public Actividad findActividadById(Integer id) {
         Transaction tx = null;
+        Actividad actividad = null;
+        Session session = Connection.getInstance().getSessionFactory().openSession();
+        try {
+            tx = session.beginTransaction();
+            Query<Actividad> query = session.createQuery("FROM Actividad a WHERE a.id = :id", Actividad.class);
+            query.setParameter("id", id);
+            actividad = query.uniqueResult();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
+        session.close();
+        return actividad;
+    }
+
+    public Actividad findActividadByNombre(String nombre) {
+        Transaction tx = null;
+        Actividad actividad = null;
+        Session session = Connection.getInstance().getSessionFactory().openSession();
         try {
             tx = session.beginTransaction();
             Query<Actividad> query = session.createQuery("FROM Actividad a WHERE a.nombre = :nombre", Actividad.class);
@@ -45,31 +58,26 @@ public class ActividadDAO {
                 tx.rollback();
             }
         }
+        session.close();
         return actividad;
     }
 
-    public static boolean deleteActividad(Actividad actividadToDelete) {
-        if (actividadToDelete == null) {
-            return false;
-        }
-        Actividad actividadFound = findActividadByNombre(actividadToDelete.getNombre());
-        if (actividadFound == null) {
-            return false;
-        }
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
+    public boolean deleteActividad(Actividad actividadToDelete) {
         Transaction tx = null;
         boolean eliminado = false;
+        Session session = Connection.getInstance().getSessionFactory().openSession();
         try {
             tx = session.beginTransaction();
-            session.delete(actividadFound);
+            session.delete(actividadToDelete);
             tx.commit();
             eliminado = true;
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
+            e.printStackTrace();
         }
+        session.close();
         return eliminado;
     }
 }

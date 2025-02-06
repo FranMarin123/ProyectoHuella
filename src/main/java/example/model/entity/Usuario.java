@@ -1,7 +1,12 @@
 package example.model.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -13,19 +18,20 @@ public class Usuario {
     @Column(name = "id_usuario", nullable = false)
     private Integer id;
 
-    @Column(name = "nombre", nullable = false, length = 100)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "email", nullable = false, length = 300)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 300)
-    private String password;
+    @Column(name = "`contraseña`", nullable = false)
+    private String contraseña;
 
-    @Column(name = "fecha_registro", nullable = false, length = 20)
-    private String fechaRegistro;
+    @ColumnDefault("current_timestamp()")
+    @Column(name = "fecha_registro")
+    private LocalDate fechaRegistro;
 
-    @OneToMany
+    @OneToMany(mappedBy = "idUsuario")
     private Set<Habito> habitos = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "idUsuario")
@@ -55,19 +61,33 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContraseña(String contraseña) {
+        try {
+
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            byte[] hashedBytes = digest.digest(contraseña.getBytes());
+
+            StringBuilder stringBuilder = new StringBuilder();
+            for (byte b : hashedBytes) {
+                stringBuilder.append(String.format("%02x", b));
+            }
+            String hashedPassword = stringBuilder.toString();
+
+            this.contraseña = hashedPassword;
+        } catch (NoSuchAlgorithmException e) {
+        }
     }
 
-    public String getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
+    public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

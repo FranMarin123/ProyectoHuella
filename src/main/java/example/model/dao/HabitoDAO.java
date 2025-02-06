@@ -4,65 +4,53 @@ import example.connection.Connection;
 import example.model.entity.Habito;
 import example.model.entity.HabitoId;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 public class HabitoDAO {
 
-    public static void saveHabito(Habito habito) {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
+    public void saveHabito(Habito habito) {
+        Session session = Connection.getInstance().getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.save(habito);
-            tx.commit();
+            if (session.save(habito) != null) {
+                tx.commit();
+            }
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
-            e.printStackTrace();
         }
+        session.close();
     }
 
-    public static Habito findHabitoById(HabitoId id) {
-        if (id == null) {
-            return null;
-        }
-        Habito habito = null;
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
+    public Habito findHabitoById(HabitoId id) {
         Transaction tx = null;
+        Habito habito = null;
+        Session session = Connection.getInstance().getSessionFactory().openSession();
         try {
             tx = session.beginTransaction();
-            habito = session.get(Habito.class, id);
+            Query<Habito> query = session.createQuery("FROM Habito h WHERE h.id = :id", Habito.class);
+            query.setParameter("id", id);
+            habito = query.uniqueResult();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
-            e.printStackTrace();
         }
+        session.close();
         return habito;
     }
 
-    public static boolean deleteHabito(HabitoId id) {
-        if (id == null) {
-            return false;
-        }
-        Habito habito = findHabitoById(id);
-        if (habito == null) {
-            return false;
-        }
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
+    public boolean deleteHabito(Habito habitoToDelete) {
         Transaction tx = null;
         boolean eliminado = false;
+        Session session = Connection.getInstance().getSessionFactory().openSession();
         try {
             tx = session.beginTransaction();
-            session.delete(habito);
+            session.delete(habitoToDelete);
             tx.commit();
             eliminado = true;
         } catch (Exception e) {
@@ -71,6 +59,7 @@ public class HabitoDAO {
             }
             e.printStackTrace();
         }
+        session.close();
         return eliminado;
     }
 }

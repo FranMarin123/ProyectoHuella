@@ -1,9 +1,9 @@
 package example.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "habito")
@@ -11,14 +11,25 @@ public class Habito {
     @EmbeddedId
     private HabitoId id;
 
+    @MapsId("idUsuario")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario idUsuario;
+
+    @MapsId("idActividad")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_actividad", nullable = false)
+    private Actividad idActividad;
+
     @Column(name = "frecuencia", nullable = false)
     private Integer frecuencia;
 
-    @Column(name = "tipo", nullable = false, length = 20)
+    @Lob
+    @Column(name = "tipo", nullable = false)
     private String tipo;
 
-    @Column(name = "ultima_fecha", nullable = false, length = 20)
-    private String ultimaFecha;
+    @Column(name = "ultima_fecha")
+    private LocalDate ultimaFecha;
 
     public HabitoId getId() {
         return id;
@@ -26,6 +37,22 @@ public class Habito {
 
     public void setId(HabitoId id) {
         this.id = id;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Actividad getIdActividad() {
+        return idActividad;
+    }
+
+    public void setIdActividad(Actividad idActividad) {
+        this.idActividad = idActividad;
     }
 
     public Integer getFrecuencia() {
@@ -44,11 +71,11 @@ public class Habito {
         this.tipo = tipo;
     }
 
-    public String getUltimaFecha() {
+    public LocalDate getUltimaFecha() {
         return ultimaFecha;
     }
 
-    public void setUltimaFecha(String ultimaFecha) {
+    public void setUltimaFecha(LocalDate ultimaFecha) {
         this.ultimaFecha = ultimaFecha;
     }
 

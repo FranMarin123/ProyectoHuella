@@ -1,8 +1,8 @@
 package example.model.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "recomendacion")
@@ -12,16 +12,16 @@ public class Recomendacion {
     @Column(name = "id_recomendacion", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_categoria", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_categoria")
     private Categoria idCategoria;
 
-    @Column(name = "descripcion", nullable = false, length = 500)
+    @Lob
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    @Column(name = "impacto_estimado", nullable = false)
-    private Integer impactoEstimado;
+    @Column(name = "impacto_estimado", nullable = false, precision = 10, scale = 2)
+    private BigDecimal impactoEstimado;
 
     public Integer getId() {
         return id;
@@ -47,11 +47,11 @@ public class Recomendacion {
         this.descripcion = descripcion;
     }
 
-    public Integer getImpactoEstimado() {
+    public BigDecimal getImpactoEstimado() {
         return impactoEstimado;
     }
 
-    public void setImpactoEstimado(Integer impactoEstimado) {
+    public void setImpactoEstimado(BigDecimal impactoEstimado) {
         this.impactoEstimado = impactoEstimado;
     }
 
