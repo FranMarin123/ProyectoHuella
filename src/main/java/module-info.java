@@ -4,9 +4,12 @@ module example {
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
     requires java.naming;
+    requires java.desktop;
 
     opens example to javafx.fxml;
     exports example;
 
     opens example.model.entity to org.hibernate.orm.core;
+    exports example.controllers;
+    opens example.controllers to javafx.fxml;
 }
