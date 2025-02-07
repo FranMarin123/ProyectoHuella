@@ -3,6 +3,8 @@ package example.model.services;
 import example.model.dao.ActividadDAO;
 import example.model.entity.Actividad;
 
+import java.util.List;
+
 public class ActividadService {
     private final ActividadDAO actividadDAO = new ActividadDAO();
 
@@ -43,5 +45,9 @@ public class ActividadService {
             eliminado = true;
         }
         return eliminado;
+    }
+
+    public List<Actividad> findAllActividades() {
+        return actividadDAO.findAllActividad();
     }
 }

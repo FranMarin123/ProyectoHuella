@@ -42,4 +42,15 @@ public class UsuarioService {
         }
         return eliminado;
     }
+
+    public boolean updateUser(Usuario usuarioToUpdate) {
+        if (usuarioToUpdate == null || usuarioToUpdate.getEmail() == null || usuarioToUpdate.getEmail().isEmpty()) {
+            return false;
+        }
+        /*Usuario usuarioFinded = findUser(usuarioToUpdate.getEmail());
+        if (usuarioFinded == null) {
+            return false;
+        }*/
+        return usuarioDAO.updateUser(usuarioToUpdate);
+    }
 }

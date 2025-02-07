@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 public class ActividadDAO {
 
     public void saveActividad(Actividad actividad) {
@@ -79,5 +81,24 @@ public class ActividadDAO {
         }
         session.close();
         return eliminado;
+    }
+
+    public List<Actividad> findAllActividad() {
+        Transaction tx = null;
+        List<Actividad> actividades = null;
+        Session session = Connection.getInstance().getSessionFactory().openSession();
+        try {
+            tx = session.beginTransaction();
+            Query<Actividad> query = session.createQuery("FROM Actividad", Actividad.class);
+            actividades = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
+        session.close();
+        return actividades;
     }
 }

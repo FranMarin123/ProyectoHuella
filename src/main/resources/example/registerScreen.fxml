@@ -12,13 +12,13 @@
     <Label alignment="CENTER" layoutX="50" layoutY="30" prefWidth="300" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;" text="Registro de Usuario" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="30" />
 
     <!-- Campo de nombre -->
-    <TextField fx:id="nameField" layoutX="100" layoutY="90" prefWidth="200" promptText="Nombre completo" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5px;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="90.0" />
+    <TextField fx:id="nombre" layoutX="100" layoutY="90" prefWidth="200" promptText="Nombre completo" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5px;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="90.0" />
 
     <!-- Campo de correo electrónico -->
-    <TextField fx:id="emailField" layoutX="100" layoutY="130" prefWidth="200" promptText="Correo electrónico" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5px;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="130.0" />
+    <TextField fx:id="email" layoutX="100" layoutY="130" prefWidth="200" promptText="Correo electrónico" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5px;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="130.0" />
 
     <!-- Campo de contraseña -->
-    <PasswordField fx:id="passwordField" layoutX="100" layoutY="170" prefWidth="200" promptText="Contraseña" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5px;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="170.0" />
+    <PasswordField fx:id="password" layoutX="100" layoutY="170" prefWidth="200" promptText="Contraseña" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5px;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="170.0" />
 
     <!-- Botón de Iniciar Sesión -->
     <Button onAction="#registerClick" prefHeight="40" prefWidth="160" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5;" text="Registrar" AnchorPane.leftAnchor="120" AnchorPane.rightAnchor="120" AnchorPane.topAnchor="220" />

@@ -61,5 +61,24 @@ public class UsuarioDAO {
         session.close();
         return eliminado;
     }
+
+    public boolean updateUser(Usuario usuarioToUpdate) {
+        Transaction tx = null;
+        boolean actualizado = false;
+        Session session = Connection.getInstance().getSessionFactory().openSession();
+        try {
+            tx = session.beginTransaction();
+            session.update(usuarioToUpdate);
+            tx.commit();
+            actualizado = true;
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }
+        session.close();
+        return actualizado;
+    }
 }
 

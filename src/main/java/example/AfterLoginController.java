@@ -1,6 +1,7 @@
 package example;
 
 import example.controllers.Controller;
+import example.model.singleton.UserSession;
 import example.view.Scenes;
 import javafx.fxml.Initializable;
 
@@ -11,7 +12,6 @@ import java.util.ResourceBundle;
 public class AfterLoginController extends Controller implements Initializable {
     @Override
     public void onOpen(Object input) throws IOException {
-
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AfterLoginController extends Controller implements Initializable {
 
     public void registraHuellasClick(){
         try {
-            App.currentController.changeScene(Scenes.EDIT,null);
+            App.currentController.changeScene(Scenes.REGISTERHUELLA,null);
         } catch (IOException e) {
         }
     }
@@ -69,6 +69,7 @@ public class AfterLoginController extends Controller implements Initializable {
     public void salirClick(){
         try {
             App.currentController.changeScene(Scenes.PRINCIPAL,null);
+            UserSession.getInstance().closeSession();
         } catch (IOException e) {
         }
     }

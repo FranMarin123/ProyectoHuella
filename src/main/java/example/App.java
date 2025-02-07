@@ -5,6 +5,7 @@ import example.view.Scenes;
 import example.view.View;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class App extends Application {
         currentController=(AppController) view.controller;
         currentController.onOpen(null);
         stage.setTitle("Huella");
-        //stage.getIcons().add(new Image(App.class.getResourceAsStream("images/logoWindow.png")));
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("images/logo.png")));
         stage.setScene(scene);
         stage.setMinHeight(520);
         stage.setMinWidth(680);

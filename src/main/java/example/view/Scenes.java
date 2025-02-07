@@ -6,7 +6,8 @@ public enum Scenes {
     LOGIN("loginScreen.fxml"),
     REGISTER("registerScreen.fxml"),
     LOGGED("afterLoginScreen.fxml"),
-    EDIT("editProfileScreen.fxml"),;
+    EDIT("editProfileScreen.fxml"),
+    REGISTERHUELLA("registrarHuella.fxml"),;
 
     private String path;
 

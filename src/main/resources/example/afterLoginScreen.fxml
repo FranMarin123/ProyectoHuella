@@ -14,7 +14,7 @@
 
     <Button onAction="#registraHabitosClick" prefHeight="40" prefWidth="160" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5;" text="Registrar Hábitos" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="330.0" AnchorPane.topAnchor="180" />
 
-    <Button onAction="#verImpactoClick" prefHeight="40" prefWidth="186.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5;" text="Ver Impacto Ambiental" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="80" />
+    <Button onAction="#verImpactoClick" prefHeight="40" prefWidth="186.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5;" text="Ver Impacto Ambiental" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80" />
 
     <Button layoutX="384.0" onAction="#recomendacionesClick" prefHeight="40" prefWidth="186.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5;" text="Recibir Recomendaciones" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="130" />
 
