@@ -12,7 +12,7 @@ public class JavaFXUtils {
         errorAlert.setTitle(title);
         if (errorAlert.getDialogPane().getScene().getWindow()!=null) {
             Stage alertStage = (Stage) errorAlert.getDialogPane().getScene().getWindow();
-            alertStage.getIcons().add(new Image(App.class.getResourceAsStream("images/log.png")));
+            alertStage.getIcons().add(new Image(App.class.getResourceAsStream("images/logo.png")));
         }
         errorAlert.setHeaderText(title);
         errorAlert.setContentText(textAboutAlert);
