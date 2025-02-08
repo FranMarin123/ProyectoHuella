@@ -8,11 +8,11 @@ public class HabitoService {
     private final HabitoDAO habitoDAO = new HabitoDAO();
 
     public boolean saveHabito(Habito habito) {
-        if (habito != null && habito.getId() != null) {
-            if (findHabitoById(habito.getId()) == null) {
+        if (habito != null) {
+            //if (findHabitoById(habito.getId()) == null) {
                 habitoDAO.saveHabito(habito);
                 return true;
-            }
+            //}
         }
         return false;
     }

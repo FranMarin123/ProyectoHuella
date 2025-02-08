@@ -15,9 +15,11 @@ public class HabitoDAO {
         try {
             tx = session.beginTransaction();
             if (session.save(habito) != null) {
+                System.out.println("EXITO");
                 tx.commit();
             }
         } catch (Exception e) {
+            System.out.println("ERROR");
             if (tx != null) {
                 tx.rollback();
             }

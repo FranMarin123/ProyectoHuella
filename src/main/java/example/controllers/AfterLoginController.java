@@ -1,6 +1,6 @@
-package example;
+package example.controllers;
 
-import example.controllers.Controller;
+import example.App;
 import example.model.singleton.UserSession;
 import example.view.Scenes;
 import javafx.fxml.Initializable;
@@ -40,28 +40,28 @@ public class AfterLoginController extends Controller implements Initializable {
 
     public void registraHabitosClick(){
         try {
-            App.currentController.changeScene(Scenes.EDIT,null);
+            App.currentController.changeScene(Scenes.REGISTERHABITO,null);
         } catch (IOException e) {
         }
     }
 
     public void verImpactoClick(){
         try {
-            App.currentController.changeScene(Scenes.EDIT,null);
+            App.currentController.changeScene(Scenes.IMPACTO,null);
         } catch (IOException e) {
         }
     }
 
     public void recomendacionesClick(){
         try {
-            App.currentController.changeScene(Scenes.EDIT,null);
+            App.currentController.changeScene(Scenes.RECOMENDACION,null);
         } catch (IOException e) {
         }
     }
 
     public void seguimientoClick(){
         try {
-            App.currentController.changeScene(Scenes.EDIT,null);
+            App.currentController.changeScene(Scenes.GRAFICA,null);
         } catch (IOException e) {
         }
     }

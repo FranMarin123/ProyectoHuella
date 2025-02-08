@@ -1,6 +1,7 @@
-package example;
+package example.controllers;
 
-import example.controllers.Controller;
+import example.App;
+import example.Utilities.JavaFXUtils;
 import example.model.entity.Actividad;
 import example.model.entity.Huella;
 import example.model.services.ActividadService;
@@ -55,10 +56,13 @@ public class RegistrarHuellaController extends Controller implements Initializab
             huella.setValor(new BigDecimal(valor.getText()));
             huella.setIdUsuario(UserSession.getInstance().getCurrentUsuario());
             huellaService.saveHuella(huella);
+            JavaFXUtils.showConfirmAlert("HUELLA CREADO","La huella se ha registrado exitosamente");
             try {
                 App.currentController.changeScene(Scenes.LOGGED, null);
             } catch (IOException e) {
             }
+        }else {
+            JavaFXUtils.showErrorAlert("ERROR","Error al registrar la huella");
         }
     }
 

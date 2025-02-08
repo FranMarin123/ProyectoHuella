@@ -7,47 +7,24 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="427.0" prefWidth="526.0" style="-fx-background-color: #F4F4F4;"
-            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="example.RegistrarHuellaController">
+<AnchorPane prefHeight="427.0" prefWidth="526.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.controllers.RegistrarHabitoController">
 
-    <Label alignment="CENTER" layoutX="50" layoutY="30" prefWidth="300"
-           style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;"
-           text="Registro de Huella"
-           AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="30" />
+    <Label alignment="CENTER" layoutX="50" layoutY="30" prefWidth="300" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;" text="Registro de Habitos" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50" AnchorPane.topAnchor="30" />
 
-    <Label layoutX="50" layoutY="80" style="-fx-font-size: 14px; -fx-text-fill: #333;"
-           text="Categoría:"
-           AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="412.4" AnchorPane.topAnchor="80" />
-    <ChoiceBox fx:id="choiceBox1" prefHeight="30" prefWidth="200"
-               AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="163.0" AnchorPane.topAnchor="75" />
+    <Label layoutX="50" layoutY="80" style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Actividad:" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="412.4" AnchorPane.topAnchor="80" />
+    <ChoiceBox fx:id="choiceBox" prefHeight="30" prefWidth="200" AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="163.0" AnchorPane.topAnchor="75" />
 
-    <Label layoutX="50" layoutY="130" style="-fx-font-size: 14px; -fx-text-fill: #333;"
-           text="Valor:"
-           AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="412.8" AnchorPane.topAnchor="130" />
-    <TextField fx:id="valor" prefHeight="30" prefWidth="200" promptText="Ingrese el valor"
-               AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="163.0" AnchorPane.topAnchor="125" />
+    <Label layoutX="50" layoutY="130" prefHeight="20.0" prefWidth="75.0" style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Frecuencia:" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="401.0" AnchorPane.topAnchor="130" />
+    <TextField fx:id="valor" prefHeight="30" prefWidth="200" promptText="Ingrese el valor" AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="163.0" AnchorPane.topAnchor="125" />
 
-    <Label layoutX="50" layoutY="180" style="-fx-font-size: 14px; -fx-text-fill: #333;"
-           text="Unidad:"
-           AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="401.0" AnchorPane.topAnchor="180" />
-    <ChoiceBox fx:id="choiceBox2" prefHeight="30" prefWidth="200"
-               AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="163.0" AnchorPane.topAnchor="175" />
+    <Label layoutX="50" layoutY="180" style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Tipo:" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="401.0" AnchorPane.topAnchor="180" />
+    <ChoiceBox fx:id="tipo" prefHeight="30" prefWidth="200" AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="163.0" AnchorPane.topAnchor="175" />
 
-    <Label layoutX="50" layoutY="230" style="-fx-font-size: 14px; -fx-text-fill: #333;"
-           text="Fecha:"
-           AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="412.8" AnchorPane.topAnchor="230" />
-    <DatePicker fx:id="fecha" prefHeight="30" prefWidth="200"
-                AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="163.4" AnchorPane.topAnchor="225.0" />
+    <Label layoutX="50" layoutY="230" prefHeight="20.0" prefWidth="90.0" style="-fx-font-size: 14px; -fx-text-fill: #333;" text="Última Fecha:" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="386.0" AnchorPane.topAnchor="230" />
+    <DatePicker fx:id="fecha" prefHeight="30" prefWidth="200" AnchorPane.leftAnchor="163.0" AnchorPane.rightAnchor="163.4" AnchorPane.topAnchor="225.0" />
 
-    <Button fx:id="registrarBtn" prefHeight="40" prefWidth="160"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5;"
-            text="Registrar"
-            AnchorPane.leftAnchor="120" AnchorPane.rightAnchor="120" AnchorPane.topAnchor="300.0" />
+    <Button onAction="#registerBoton" prefHeight="40" prefWidth="160" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5;" text="Registrar" AnchorPane.leftAnchor="120" AnchorPane.rightAnchor="120" AnchorPane.topAnchor="300.0" />
 
-    <Button fx:id="salirBtn" onAction="#salirClick" prefHeight="40" prefWidth="160"
-            style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5;"
-            text="Salir"
-            AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="120" AnchorPane.rightAnchor="120" />
+    <Button onAction="#salirClick" prefHeight="40" prefWidth="160" style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5;" text="Salir" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="120" AnchorPane.rightAnchor="120" />
 
 </AnchorPane>

@@ -1,6 +1,7 @@
-package example;
+package example.controllers;
 
-import example.controllers.Controller;
+import example.App;
+import example.Utilities.JavaFXUtils;
 import example.model.services.UsuarioService;
 import example.model.singleton.UserSession;
 import example.view.Scenes;
@@ -48,11 +49,14 @@ public class EditProfileController extends Controller implements Initializable {
             comp = true;
         }
         if (comp) {
+            JavaFXUtils.showConfirmAlert("CAMBIO COMPLETADO", "Se ha modificado su usuario correctamente");
             try {
                 App.currentController.changeScene(Scenes.LOGGED, null);
                 usuarioService.updateUser(UserSession.getInstance().getCurrentUsuario());
             } catch (IOException e) {
             }
+        }else {
+            JavaFXUtils.showErrorAlert("ERROR", "No se ha modificado su usuario");
         }
     }
 

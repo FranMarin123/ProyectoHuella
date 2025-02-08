@@ -7,7 +7,12 @@ public enum Scenes {
     REGISTER("registerScreen.fxml"),
     LOGGED("afterLoginScreen.fxml"),
     EDIT("editProfileScreen.fxml"),
-    REGISTERHUELLA("registrarHuella.fxml"),;
+    REGISTERHUELLA("registrarHuella.fxml"),
+    REGISTERHABITO("registrarHabito.fxml"),
+    IMPACTO("verImpacto.fxml"),
+    RECOMENDACION("recomendacion.fxml"),
+    GRAFICA("grafica.fxml"),
+    ;
 
     private String path;
 

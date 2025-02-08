@@ -5,6 +5,8 @@ module example {
     requires org.hibernate.orm.core;
     requires java.naming;
     requires java.desktop;
+    requires kernel;
+    requires layout;
 
     opens example to javafx.fxml;
     exports example;

@@ -1,6 +1,6 @@
-package example;
+package example.controllers;
 
-import example.controllers.Controller;
+import example.App;
 import example.view.Scenes;
 import javafx.fxml.Initializable;
 

@@ -1,6 +1,7 @@
-package example;
+package example.controllers;
 
-import example.controllers.Controller;
+import example.App;
+import example.Utilities.JavaFXUtils;
 import example.model.entity.Usuario;
 import example.model.services.UsuarioService;
 import example.model.singleton.UserSession;
@@ -11,12 +12,13 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class LoginController extends Controller implements Initializable {
+public class RegisterController extends Controller implements Initializable {
+    public TextField nombre;
     public TextField email;
     public PasswordField password;
-
     private final UsuarioService usuarioService=new UsuarioService();
 
     @Override
@@ -34,21 +36,29 @@ public class LoginController extends Controller implements Initializable {
 
     }
 
-    public void loginClick(){
+    public void registerClick(){
         Usuario usuario = new Usuario();
         Usuario usuarioFinded;
-        if (email !=null && !email.getText().isEmpty() && password!=null && !password.getText().isEmpty()) {
+        if (email !=null && !email.getText().isEmpty() && password!=null && !password.getText().isEmpty()
+                && nombre!=null && !nombre.getText().isEmpty()) {
             usuario.setContraseña(password.getText());
             usuario.setEmail(email.getText());
+            usuario.setNombre(nombre.getText());
+            usuario.setFechaRegistro(LocalDate.now());
             usuarioFinded=usuarioService.findUser(email.getText());
-            if(usuarioFinded!=null && usuarioFinded.getEmail().equals(usuario.getEmail())
-                    && usuarioFinded.getContraseña().equals(usuario.getContraseña())){
-                UserSession.getInstance(usuarioFinded);
+            if(usuarioFinded==null){
+                usuarioService.saveUser(usuario);
+                UserSession.getInstance(usuario);
+                JavaFXUtils.showConfirmAlert("USUARIO CREADO", ("El usuario ha sido creado correctamente, bienvenido "+usuario.getNombre()));
                 try {
                     App.currentController.changeScene(Scenes.LOGGED,null);
                 } catch (IOException e) {
                 }
+            }else {
+                JavaFXUtils.showErrorAlert("ERROR","El usuario ya existe");
             }
+        }else {
+            JavaFXUtils.showErrorAlert("ERROR","Por favor completa todos los campos");
         }
     }
 
